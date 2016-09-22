@@ -35,7 +35,7 @@ for (var e in events) {
 
 function emitEvent(event) {
   return function (doc) {
-    PollEvents.emit(event + ':' + doc._id, doc);
+    PollEvents.emit(event + ': ' + doc._id, doc);
     PollEvents.emit(event, doc);
   };
 }

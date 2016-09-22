@@ -46,10 +46,10 @@ function respondWithResult(res, statusCode) {
 }
 
 function patchUpdates(patches) {
-
   return function (entity) {
     try {
       _fastJsonPatch2.default.apply(entity, patches);
+      //Reflect.apply(jsonpatch, entity, [patches]);
     } catch (err) {
       return _promise2.default.reject(err);
     }
