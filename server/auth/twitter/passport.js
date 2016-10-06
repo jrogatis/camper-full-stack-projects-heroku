@@ -19,6 +19,9 @@ function setup(User, config) {
     consumerSecret: config.twitter.clientSecret,
     callbackURL: config.twitter.callbackURL
   }, function (token, tokenSecret, profile, done) {
+    profile._json.id = '' + profile._json.id;
+    profile.id = '' + profile.id;
+
     User.findOne({ 'twitter.id': profile.id }).exec().then(function (user) {
       if (user) {
         return done(null, user);

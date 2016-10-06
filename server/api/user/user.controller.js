@@ -8,6 +8,7 @@ exports.create = create;
 exports.show = show;
 exports.destroy = destroy;
 exports.changePassword = changePassword;
+exports.changeSettings = changeSettings;
 exports.me = me;
 exports.authCallback = authCallback;
 
@@ -109,6 +110,24 @@ function changePassword(req, res) {
     }
   });
 }
+
+function changeSettings(req, res) {
+  var userId = req.user._id;
+  var userNewSettings = req.body;
+  console.log(userNewSettings);
+
+  return _user2.default.findById(userId).exec().then(function (user) {
+    user.fullName = userNewSettings.newUser.fullName;
+    user.city = userNewSettings.newUser.city;
+    user.state = userNewSettings.newUser.state;
+    console.log('no user', userNewSettings, user);
+    return user.save().then(function () {
+      res.status(204).end();
+    }).catch(function (error) {
+      return console.log(error);
+    });
+  });
+};
 
 /**
  * Get my info

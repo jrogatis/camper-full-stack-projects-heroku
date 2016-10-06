@@ -21,6 +21,9 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new _mongoose.Schema({
   name: String,
+  fullName: String,
+  city: String,
+  state: String,
   email: {
     type: String,
     lowercase: true,
