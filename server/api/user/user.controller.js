@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.index = index;
 exports.create = create;
+exports.showInfo = showInfo;
 exports.show = show;
 exports.destroy = destroy;
 exports.changePassword = changePassword;
@@ -40,6 +41,15 @@ function handleError(res, statusCode) {
   };
 }
 
+function handleEntityNotFound(res) {
+  return function (entity) {
+    if (!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+}
 /**
  * Get list of users
  * restriction: 'admin'
@@ -66,9 +76,21 @@ function create(req, res) {
 }
 
 /**
+ * Get a single user Info
+ */
+function showInfo(req, res) {
+  var userId = req.params.id;
+
+  return _user2.default.findById(userId).exec().then(handleEntityNotFound(res)).then(function (user) {
+    res.json(user);
+  });
+}
+
+/**
  * Get a single user
  */
 function show(req, res, next) {
+  console.log('no show');
   var userId = req.params.id;
 
   return _user2.default.findById(userId).exec().then(function (user) {
@@ -114,20 +136,17 @@ function changePassword(req, res) {
 function changeSettings(req, res) {
   var userId = req.user._id;
   var userNewSettings = req.body;
-  console.log(userNewSettings);
-
   return _user2.default.findById(userId).exec().then(function (user) {
     user.fullName = userNewSettings.newUser.fullName;
     user.city = userNewSettings.newUser.city;
     user.state = userNewSettings.newUser.state;
-    console.log('no user', userNewSettings, user);
     return user.save().then(function () {
       res.status(204).end();
     }).catch(function (error) {
       return console.log(error);
     });
   });
-};
+}
 
 /**
  * Get my info
