@@ -39,10 +39,6 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _querystring = require('querystring');
-
-var _querystring2 = _interopRequireDefault(_querystring);
-
 var _requestPromise = require('request-promise');
 
 var _requestPromise2 = _interopRequireDefault(_requestPromise);
@@ -61,22 +57,6 @@ var dateFormats = ['YYYY-MM-DD', 'MM/DD/YYYY'];
 
 function camelize(text) {
   return (0, _string2.default)(text).slugify().camelize().s;
-}
-
-function toDate(value, valueForError) {
-  try {
-    var date = (0, _moment2.default)(value, dateFormats).toDate();
-    if (date.getFullYear() < 1400) {
-      return null;
-    }
-    return date;
-  } catch (err) {
-    if (_lodash2.default.isUndefined(valueForError)) {
-      return null;
-    } else {
-      return valueForError;
-    }
-  }
 }
 
 function toFloat(value, valueForNaN) {
@@ -117,10 +97,6 @@ function transformHistorical(symbol, data) {
         value = toFloat(value, null);
       } else if (_lodash2.default.includes(['Date'], heading)) {
         value = value;
-        /*value = toDate(value, null);
-        if (value && !moment(value).isValid()) {
-          value = null;
-        }*/
       }
       result[camelize(heading)] = value;
     });
@@ -204,7 +180,6 @@ function showQuotes(req, res) {
     f: values.to.format('YYYY'),
     g: 'd',
     ignore: '.csv'
-
   };
 
   (0, _requestPromise2.default)({ uri: url, qs: qsa }).then(function (ret) {
@@ -221,12 +196,12 @@ function show(req, res) {
   }).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(handleError(res));
 }
 
-// Creates a new nl in the DB
+// Creates a new stock Symbol in the DB
 function create(req, res) {
   return _stocksApi2.default.create(req.body).then(respondWithResult(res, 201)).catch(handleError(res));
 }
 
-// Upserts the given nl in the DB at the specified ID
+// Upserts the given stock in the DB at the specified ID
 function upsert(req, res) {
   if (req.body._id) {
     delete req.body._id;
