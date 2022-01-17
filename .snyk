@@ -1,0 +1,41 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - shrink-ray > debug:
+        patched: '2022-01-17T15:35:42.591Z'
+    - socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2022-01-17T15:35:42.591Z'
+  'npm:hoek:20180212':
+    - node-yelp > request > hawk > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - node-yelp > request > hawk > boom > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - node-yelp > request > hawk > sntp > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - node-yelp > request > hawk > cryptiles > boom > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > boom > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > sntp > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > cryptiles > boom > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > boom > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > sntp > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2022-01-17T15:35:42.591Z'
+  'npm:lodash:20180130':
+    - node-yelp > lodash:
+        patched: '2022-01-17T15:35:42.591Z'
+  'npm:tunnel-agent:20170305':
+    - node-yelp > request > tunnel-agent:
+        patched: '2022-01-17T15:35:42.591Z'
